@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="ftp" extends="abstract_struts, struts-default, json-default" namespace="/">
+	    <action name="getFtpFile" class="ajax.ftp.getFtpFile">
+		    <result type="stream">  
+		        <!--param name="contentType">${mimeType}</param-->
+		        <param name="contentType">application/octet-stream</param>
+		        <param name="inputName">inStream</param>  
+		        <param name="contentDisposition">attachment;filename="${filename}"</param> 
+		        <param name="bufferSize">1024</param>
+	    	</result>		    
+		</action>
+        
+        
+	</package>
+</struts>
