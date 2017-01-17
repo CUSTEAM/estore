@@ -3,7 +3,8 @@
 	<button type="button" class="overlay-close hidden-xs" data-dismiss="modal">&#215;</button>
 	<div class="modal-content detail-popup" id="cartView-popup">
 		<button type="button" class="overlay-close inner visible-xs" data-dismiss="modal">×</button>
-		<form action="index.html">
+		<form action="finish.vx" method="post">
+		
 			<div class="b-title text-center c-white">Your Cart</div>
 			<div class="wrap-cart-window clearfix">
 				<div class="cart-items">
@@ -92,33 +93,34 @@
 				</div>
 				<div class="form-req mt35">
 					<div class="form-group">
-						<label for="f01">訂購人 <span class="c-req">* </span>:
-						</label> <input type="text" class="form-control" id="f01" data-min="2"
-							required>
+						<label for="f01">訂購人:</label> 
+						<input type="text" class="form-control" id="f01" name="order_name" data-min="2" required>
 					</div>
 					<div class="form-group">
-						<label for="f03">連絡電話 <span class="c-req">*</span>:
-						</label> 
-						<input type="text" class="form-control form-tel" id="f03" data-notice="Invalid mobile phone number" required>
+						<label for="f03">連絡電話 <!-- pan class="c-req">*</span-->:</label> 
+						<input type="text" class="form-control form-tel" id="f03" name="order_tel" data-notice="Invalid mobile phone number">
 					</div>
 					<div class="form-group">
-						<label for="f02">E-mail: </label> <input type="email"
-							class="form-control" id="f02">
+						<label for="f02">E-mail: </label> 
+						<input type="email" name="order_email" class="form-control" id="f02" required>
 					</div>
 					<div class="form-group">
-						<label for="f04">配送地址 <span class="c-req">*
-						</span>:
-						</label>
-						<textarea class="" id="f04" required></textarea>
+						<label for="f04">配送地址:</label>
+						<textarea name="order_addr" id="f04" required></textarea>
 					</div>
-					<div class="description">
+					<div class="form-group" style="display:none;">
+						<label for="f05">附註事項:</label>
+						<textarea id="order_note" name="order_note" id="f05"></textarea>
+					</div>
+					<!--div class="description">
 						( <span class="c-req">* </span>) 為必填欄位
-					</div>
+					</div-->
 					<div class="text-center">
-						<button type="submit" class="btn btn-icon btn-clicked btn--sendord flaticon-delivery55 mt45">送出訂單</button>
+						<button type="submit" id="order" class="btn btn-icon btn-clicked btn--sendord flaticon-delivery55 mt45">送出訂單</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+<!-- script src="js/addorder.js"></script-->

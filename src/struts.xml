@@ -14,14 +14,9 @@
 	<constant name="struts.multipart.maxSize" value="20971520"/>
 	
 	<package name="abstract_struts" abstract="true" extends="struts-default" namespace="/">		
-		
-		
-		
-		
 		<global-results>			
 			<result name="error">error.jsp</result>			
-            <result name="unknownError">/error.jsp</result>  
-            
+            <result name="unknownError">/error.jsp</result>
 		</global-results>
 		
 		<global-exception-mappings>

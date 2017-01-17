@@ -7,7 +7,7 @@
 			
 			<div class="call-up pull-left">
 				<div>
-					<a href="tel:1234567790"> <i class="flaticon-phone72"></i>${site_name}</a>
+					<a href="wellcome.vx?view=true"> <i class="flaticon-phone72"></i>${site_name}</a>
 				</div>
 			</div>
 			<!-- div class="logo-main">
@@ -33,16 +33,16 @@
 					
 					<c:if test="${body_discount!=null}"><li><a href="#s-discounts" data-dismiss="modal">限時折扣</a></li></c:if>
 					
-					<!--  
-					<li><a href="#s-why" data-dismiss="modal">Why Us?</a></li>
-					<li><a href="#s-video" data-dismiss="modal">Video about us</a></li>
-					<li><a href="#s-how-work" data-dismiss="modal">How itworks</a></li>
-					<li><a href="#s-shopnum" data-dismiss="modal">The Store in Figures</a></li>
-					<li><a href="#s-deliv" data-dismiss="modal">Shipping</a></li>
-					<li><a href="#s-clients" data-dismiss="modal">Reviews</a></li>
-					<li><a href="#s-address" data-dismiss="modal">Contacts</a></li>
-					<li><a href="#s-contacts" data-dismiss="modal">Feedback</a></li>
-					-->
+					
+					<c:if test="${body_why!=null}"><li><a href="#s-why" data-dismiss="modal">${body_why}</a></li></c:if>
+					<c:if test="${body_video!=null}"><li><a href="#s-video" data-dismiss="modal">${body_video}</a></li></c:if>
+					<c:if test="${body_how!=null}"><li><a href="#s-how-work" data-dismiss="modal">${body_how}</a></li></c:if>
+					<c:if test="${body_shopnum!=null}"><li><a href="#s-shopnum" data-dismiss="modal">${body_shopnum}</a></li></c:if>
+					<c:if test="${body_deliv!=null}"><li><a href="#s-deliv" data-dismiss="modal">${body_deliv}</a></li></c:if>
+					<c:if test="${body_clients!=null}"><li><a href="#s-clients" data-dismiss="modal">${body_clients}</a></li></c:if>
+					<c:if test="${body_address!=null}"><li><a href="#s-address" data-dismiss="modal">${body_address}</a></li></c:if>
+					<c:if test="${body_contacts!=null}"><li><a href="#s-contacts" data-dismiss="modal">${body_contacts}</a></li></c:if>
+					
 				</ul>
 				<a href="#" class="arr-nav prev disabled">&#9679; &#9679;
 					&#9679;</a> <a href="#" class="arr-nav next">&#9679; &#9679;

@@ -14,4 +14,15 @@
         
         
 	</package>
+	
+	
+	<package name="order" extends="abstract_struts, struts-default, json-default" namespace="/">
+		<action name="order" class="ajax.order.order">
+			<result type="json">
+			    <param name="list">list</param>
+			    <param name="callbackParameter">back</param>
+			    <param name="format">yyyy/MM/DD HH:mm</param>
+		   	</result>
+		</action>	
+	</package>
 </struts>

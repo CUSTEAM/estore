@@ -114,18 +114,21 @@ function removeItem(id){
 
 function readList(){
 	var date = new Date();	
-	date.setTime(date.getTime() + (99999*60*1000));
-	//alert(date);
-	Cookies.set("shop-data", JSON.stringify($shopping_list), {expires: date});
+	//date.setTime(date.getTime() + (99999*60*1000));
+	//alert(JSON.stringify($shopping_list));
+	//Cookies.set("test",encodeURIComponent(JSON.stringify($shopping_list)), {expires:999, path: "/"});
+	Cookies.set("shop-data",$shopping_list, {expires:365, path: "/"});
+	//Cookies.set("shop-data", JSON.stringify($shopping_list), {expires: date, path: "/" });
+	//alert(Cookies.get("path"));
 	//$.cookie('the_cookie', 'the_value', { expires: 7 });
+	
+	$("#order_note").text(JSON.stringify($shopping_list))
 	var m=0;
 	var chartInfo="";
+	//alert($shopping_list)
 	for(i=0; i<$shopping_list.length; i++){
 		m+=parseInt($shopping_list[i].itemPrice)*$shopping_list[i].quant;
-		//console.log($shopping_list[i].itemName);
-		
-		
-		
+		//console.log($shopping_list[i].itemName);		
 		chartInfo+="<tr class='ci-item'>"+
 		"								<td class='col-sm-1 col-md-1 col-xs-2'>"+
 		"									<div class='media'>"+

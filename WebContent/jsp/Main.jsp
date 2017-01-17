@@ -4,75 +4,62 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%String path=request.getContextPath();String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";%>
 <!DOCTYPE html>
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if IE 8 ]><html class="ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="zh-tw" class="" style="overflow-x:hidden;">
-  <!--<![endif]-->
-  <head>
+<!--<![endif]-->
+	<head>
   	<base href="<%=basePath%>">
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-    <meta charset="UTF-8">
-    <title>${site_name}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="lib/swiper/css/swiper.min.css">
-    <!--[if IE 8 ]><link rel="stylesheet" href="lib/swiper-2.7.6/idangerous.swiper.css"><![endif]-->
-    <link type="text/css" rel="stylesheet" href="fonts/shipping-font/styles.css">
-    <link rel="stylesheet" href="styles/css/styles.css">
-    <link rel="stylesheet" href="styles/css/theme-common.css" id="theme">
-    <!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="lib/selectivizr-min.js"></script><![endif]-->
-<script src="lib/modernizr.custom.04294.js"></script>
-    <!--[if IE 8 ]>
-    <script src="lib/respond/respond.min.js"></script><![endif]-->
-    <!--2gis-->
-    <!--<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>-->
-  </head>
-  <body>
-    <div class="preloader-block"> 
-      <img src="img/preloader.gif" alt="">
-    </div>
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	<meta charset="UTF-8">
+	<title>${site_name}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="lib/swiper/css/swiper.min.css">
+	<!--[if IE 8 ]><link rel="stylesheet" href="lib/swiper-2.7.6/idangerous.swiper.css"><![endif]-->
+	<link type="text/css" rel="stylesheet" href="fonts/shipping-font/styles.css">
+	<link rel="stylesheet" href="styles/css/styles.css">
+	<link rel="stylesheet" href="styles/css/theme-common.css" id="theme">
+	<!--[if (gte IE 6)&(lte IE 8)]><script type="text/javascript" src="lib/selectivizr-min.js"></script><![endif]-->
+	<script src="lib/modernizr.custom.04294.js"></script>
+	<!--[if IE 8 ]><script src="lib/respond/respond.min.js"></script><![endif]-->
+	<!--2gis-->	
+	<!--<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>-->
+</head>
+	<body>
+    <div class="preloader-block"><img src="img/preloader.gif" alt=""></div>
     <div class="bx-panel-dummy">
     </div>
     <div class="landing-wrap" id="landing-wrap">
-      <div class="wd-cut">
-        
-        
+      <div class="wd-cut">  
         <%@ include file="header.jsp" %> 
       	<div class="main-section">
-        <!--%@ include file="banner.jsp"%-->
+        <c:if test="${body_banner!=null}"><%@ include file="banner.jsp"%></c:if>
         <div style="height:174px;"></div>
         <%@ include file="category.jsp" %>
         <c:if test="${body_discount!=null}"><%@ include file="promotions.jsp" %></c:if>
-        <!--%@ include file="whyus.jsp" %-->
-        <!--%@ include file="video.jsp" %-->
-        <!--%@ include file="howork.jsp" %-->
-        <!--%@ include file="figures.jsp" %-->
-        <!--%@ include file="payment.jsp" %--> 
-        <!--%@ include file="client.jsp" %--> 
-        <!--%@ include file="address.jsp" %-->
-        <!--%@ include file="contacts.jsp" %-->  
+        <c:if test="${body_why!=null}"><%@ include file="whyus.jsp" %></c:if>
+        <c:if test="${body_video!=null}"><%@ include file="video.jsp" %></c:if>
+        <c:if test="${body_how!=null}"><%@ include file="howork.jsp"%></c:if>
+        <c:if test="${body_shopnum!=null}"><%@ include file="figures.jsp"%></c:if>
+        <c:if test="${body_deliv!=null}"><%@ include file="payment.jsp"%></c:if>
+        <c:if test="${body_clients!=null}"><%@ include file="client.jsp"%></c:if>
+        <c:if test="${body_address!=null}"><%@ include file="address.jsp"%></c:if>
+        <c:if test="${body_contacts!=null}"><%@ include file="contacts.jsp"%></c:if>
         </div>     
         <%@ include file="footer.jsp" %>        
       </div>
        
-      <%@ include file="tmpchart.jsp" %>   
+      <%@ include file="tmpchart.jsp" %>  
+      
+      <c:if test="${param.view==null}" >
       <a href="#" id="sett-page" class="glyphicon glyphicon-cog hyde" data-toggle="modal" data-target="#modal_settings"></a>
-      
+      </c:if>
 
-      
-      
-      <div class="overlay overlay-simplegenie" id="modal_detailed" aria-hidden="true" data-backdrop="true" data-keyboard="true" tabindex="-1">
-        <button type="button" class="overlay-close hidden-xs" data-dismiss="modal">&#215;</button>
-        <div class="modal-content detail-popup">
-          <!-- content added dynamically -->
-        </div>
-      </div>
-      
-      <%@ include file="cartList.jsp" %>      
-      <!--%@ include file="setting.jsp" %-->  
-      
-    </div>
-  </body>
+
+
+
+
 <!--Load libs-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery/jquery-1.11.3.min.js"><\/script>')</script>
@@ -131,4 +118,34 @@
 		$('.form-tel').intlTelInput("loadUtils", baseUrl + 'lib/intlTelInput/utils.js');
 	})
 </script>
+
+
+
+
+
+
+
+
+
+      
+      
+      <div class="overlay overlay-simplegenie" id="modal_detailed" aria-hidden="true" data-backdrop="true" data-keyboard="true" tabindex="-1">
+        <button type="button" class="overlay-close hidden-xs" data-dismiss="modal">&#215;</button>
+        <div class="modal-content detail-popup">
+          <!-- content added dynamically -->
+        </div>
+      </div>
+      
+      
+      <c:if test="${param.view==null}" >
+      <%@ include file="setting.jsp" %>
+      </c:if>
+      
+      
+      <%@ include file="cartList.jsp" %>      
+        
+      
+    </div>
+  </body>
+
 </html>

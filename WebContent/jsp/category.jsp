@@ -15,14 +15,7 @@
 						<span class="category-name">${c.name}</span>
 					</a>
 				</li>				
-				</c:forEach>
-				
-				
-				
-				
-				
-				
-				
+				</c:forEach>				
 			</ul>
 			<div id="categories-bar"></div>
 		</div>

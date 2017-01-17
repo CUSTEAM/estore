@@ -8,9 +8,9 @@
 						http://www.springframework.org/schema/context
 						classpath:/org/springframework/beans/factory/xml/spring-context-3.2.xsd">	
 	
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<!--bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
-      	<property name="jdbcUrl"><value>jdbc:mysql://192.168.3.160:3306/estore?useUnicode=true&amp;characterEncoding=utf-8</value></property>
+      	<property name="jdbcUrl"><value>jdbc:mysql://*.*.*.*:3306/estore?useUnicode=true&amp;characterEncoding=utf-8</value></property>
 		<property name="user" value="root"/>
 		<property name="password" value="spring"/>
 		<property name="acquireRetryAttempts" value="10"></property>
@@ -21,13 +21,13 @@
         <property name="testConnectionOnCheckout" value="false"></property>
         <property name="maxIdleTime" value="30"></property>
         <property name="idleConnectionTestPeriod" value="60"></property>
-	</bean>
-	<!--bean id="dataSource"
+	</bean-->
+	<bean id="dataSource"
        class="org.springframework.jndi.JndiObjectFactoryBean">
        <property name="jndiName">
-          <value>java:comp/env/jdbc/mysql</value>
+          <value>java:comp/env/jdbc/estore</value>
        </property>
-   </bean-->
+   </bean>
     
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="dataSource"><ref local="dataSource"/></property>
@@ -41,20 +41,9 @@
         </property>     
         <property name="mappingResources">
             <list>
-            	<!--value>model/Dilg.hbm.xml</value>
-            	<value>model/DilgApply.hbm.xml</value>
-            	<value>model/PubCalendar.hbm.xml</value>
-            	<value>model/DilgApplyHist.hbm.xml</value>            	
-            	<value>model/AqAnser.hbm.xml</value>
-            	<value>model/AqQuestion.hbm.xml</value>
-            	<value>model/AqUnit.hbm.xml</value>
-            	<value>model/SYSDOC.hbm.xml</value>
-            	<value>model/AmsDocApply.hbm.xml</value>
-            	<value>model/NabbrBorApp.hbm.xml</value>
-            	<value>model/NabbrBoro.hbm.xml</value>
-            	<value>model/TaskApply.hbm.xml</value>
-            	<value>model/Task.hbm.xml</value>
-            	<value>model/TaskHist.hbm.xml</value-->
+            	<value>model/OrderDetail.hbm.xml</value>
+            	<value>model/OrderMain.hbm.xml</value>
+            	<value>model/Product.hbm.xml</value>
             </list>
         </property>
     </bean>

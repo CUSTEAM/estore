@@ -13,7 +13,8 @@
 	<p>Exception Name: <span class="label label-danger"><s:property value="exception" /></span></p>
 </div>
 <h4>Exception Details: </h4>
-<textarea class="form-control" rows="3">        <s:property value="exceptionStack" /></textarea>
+ <s:fielderror/>
+<s:property value="exceptionStack" />
 <span id="helpBlock" class="help-block">Give us your error logs and you can influence the way millions of people use the application.</span>
 <button type="submit" class="btn btn-primary">send</button>  
    

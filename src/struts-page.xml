@@ -7,6 +7,34 @@
 			<result>/jsp/front.jsp</result>
 		</action>
 		
+		<action name="wellcome" class="action.Welcome">
+			<result>/jsp/Main.jsp</result>
+		</action>
+		
+		<action name="finish" class="action.Finish">
+			<result>/jsp/finish.jsp</result>
+		</action>
+		
+		<action name="manager" class="action.Manager">
+			<result>/jsp/manager/manager.jsp</result>
+		</action>
+		
+		<action name="productManager" class="action.ProductManager">
+			<result>/jsp/manager/productManager.jsp</result>
+		</action>
+		
+		<action name="orderManager" class="action.OrderManager">
+			<result>/jsp/manager/orderManager.jsp</result>
+		</action>
+		
+		<action name="checkEmail" class="action.CheckEmail">
+			<result>/jsp/checkEmail.jsp</result>
+		</action>
+		
+		<action name="bodyManager" class="action.BodyManager">
+			<result>/jsp/manager/bodyManager.jsp</result>
+		</action>
+		
 	</package>
 	
 	
