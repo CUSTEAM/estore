@@ -114,7 +114,8 @@ public class eTaskListener extends TimerTask {
 			servletContext.setAttribute(tmp1.get(i).get("name").toString(), tmp1.get(i).get("value"));
 		}
 		
-    	
+		System.out.println("載入系統參數 - list 循序判斷");
+		servletContext.setAttribute("paramater", df.sqlGet("SELECT * FROM paramater"));
 		
     }
 

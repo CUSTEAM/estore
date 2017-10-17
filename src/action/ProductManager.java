@@ -43,7 +43,7 @@ public class ProductManager extends BaseAction{
 	
 	public String search(){
 		StringBuilder sql=new StringBuilder("SELECT c.id, c.name as category, p.Oid, p.name, p.price FROM "
-		+ "products p, code_product_category c WHERE p.category=c.id ");
+		+ "products p, code_product_category c WHERE p.category=c.id AND p.company='"+getSession().getAttribute("com")+"'");
 		if(name.trim().length()>0)sql.append("AND p.name LIKE'%"+name+"%'");
 		if(category.trim().length()>0)sql.append("AND p.category='"+category+"'");
 		
@@ -58,6 +58,7 @@ public class ProductManager extends BaseAction{
 		Product p=new Product();
 		p.setName(name);
 		p.setCategory(category);
+		p.setCompany(Integer.parseInt(getSession().getAttribute("com").toString()));
 		p.setPrice(0.0f);
 		df.update(p);
 		

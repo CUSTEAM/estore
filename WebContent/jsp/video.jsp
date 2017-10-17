@@ -27,6 +27,6 @@
                 </div>
               </div>
             </div>
-            <div id="ytpl" data-src="95F70tktZVg" data-loop="true">
+            <div id="ytpl" data-src="${video}" data-loop="true">
             </div>
           </section>

@@ -13,7 +13,15 @@
   	<base href="<%=basePath%>">
 	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
 	<meta charset="UTF-8">
-	<title>${site_name}</title>
+	
+		
+		<title>
+		<c:forEach items="${paramater}" var="c">
+		<c:if test="${c.company eq param.store && c.name eq 'site_name'}">${c.value}</c:if>
+		</c:forEach>
+		</title>
+		
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="stylesheet" href="lib/swiper/css/swiper.min.css">
 	<!--[if IE 8 ]><link rel="stylesheet" href="lib/swiper-2.7.6/idangerous.swiper.css"><![endif]-->
@@ -37,24 +45,39 @@
         <c:if test="${body_banner!=null}"><%@ include file="banner.jsp"%></c:if>
         <div style="height:174px;"></div>
         <%@ include file="category.jsp" %>
-        <c:if test="${body_discount!=null}"><%@ include file="promotions.jsp" %></c:if>
-        <c:if test="${body_why!=null}"><%@ include file="whyus.jsp" %></c:if>
-        <c:if test="${body_video!=null}"><%@ include file="video.jsp" %></c:if>
-        <c:if test="${body_how!=null}"><%@ include file="howork.jsp"%></c:if>
-        <c:if test="${body_shopnum!=null}"><%@ include file="figures.jsp"%></c:if>
-        <c:if test="${body_deliv!=null}"><%@ include file="payment.jsp"%></c:if>
-        <c:if test="${body_clients!=null}"><%@ include file="client.jsp"%></c:if>
-        <c:if test="${body_address!=null}"><%@ include file="address.jsp"%></c:if>
-        <c:if test="${body_contacts!=null}"><%@ include file="contacts.jsp"%></c:if>
+       
+        
+        <c:forEach items="${paramater}" var="c">
+		<c:if test="${c.company eq param.store && c.name eq 'site_name'}">		
+		<c:if test="${c.body_discount!=null}"><%@ include file="promotions.jsp" %></c:if>		
+		</c:if>
+		</c:forEach>
+        
+        
+        
+        
+        <c:forEach items="${paramater}" var="c">
+        <c:if test="${c.company eq param.store}">	
+        <c:if test="${c.name eq 'body_why' && !empty c.value}"><%@ include file="whyus.jsp" %></c:if>		
+		<c:set var="video" value="${c.note}" />	
+		<c:if test="${c.name eq'body_video' && !empty c.value}"><%@ include file="video.jsp" %></c:if>        
+        <c:if test="${c.name eq 'body_how' && !empty c.value}"><%@ include file="howork.jsp"%></c:if>
+        <c:if test="${c.name eq 'body_shopnum' && !empty c.value}"><%@ include file="figures.jsp"%></c:if>
+        <c:if test="${c.name eq 'body_deliv' && !empty c.value}"><%@ include file="payment.jsp"%></c:if>
+        <c:if test="${c.name eq 'body_clients' && !empty c.value}"><%@ include file="client.jsp"%></c:if>
+        <c:if test="${c.name eq 'body_address' && !empty c.value}"><%@ include file="address.jsp"%></c:if>
+        <c:if test="${c.name eq 'body_contacts' && !empty c.value}"><%@ include file="contacts.jsp"%></c:if>
+        
+        
+        </c:if>
+        </c:forEach>
         </div>     
         <%@ include file="footer.jsp" %>        
       </div>
        
       <%@ include file="tmpchart.jsp" %>  
       
-      <c:if test="${param.view==null}" >
-      <a href="#" id="sett-page" class="glyphicon glyphicon-cog hyde" data-toggle="modal" data-target="#modal_settings"></a>
-      </c:if>
+      
 
 
 
@@ -137,7 +160,8 @@
       </div>
       
       
-      <c:if test="${param.view==null}" >
+      <c:if test="${param.set eq 'true'}" >
+      <a href="#" id="sett-page" class="glyphicon glyphicon-cog hyde" data-toggle="modal" data-target="#modal_settings"></a>
       <%@ include file="setting.jsp" %>
       </c:if>
       

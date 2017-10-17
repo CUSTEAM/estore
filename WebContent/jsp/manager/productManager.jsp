@@ -9,7 +9,15 @@
 	<head>
   	<base href="<%=basePath%>">	
 	<meta charset="UTF-8">
-	<title>${site_name}商品管理</title>
+	
+	
+	<title>
+	<c:forEach items="${paramater}" var="c">
+	<c:if test="${c.company eq com && c.name eq 'site_name'}">${c.value}</c:if>
+	</c:forEach>管理
+	</title>
+	
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<!--link rel="stylesheet" href="jsp/manager/css/bootstrap.min.css">
 	<link href="/eis/inc/bootstrap/plugin/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
@@ -36,7 +44,9 @@
 				  	<select name="category" class="selectpicker form-control">
 				  		<option value="">商品類別</option>
 						<c:forEach items="${code_product_category}" var="c">
+						<c:if test="${com eq c.company}">
     					<option <c:if test="${category eq c.id}">selected</c:if> value="${c.id}">${c.name}</option>					   
+					    </c:if>
 					    </c:forEach>
 				  	</select>
 				

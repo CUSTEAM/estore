@@ -9,7 +9,11 @@
 	<head>
   	<base href="<%=basePath%>">	
 	<meta charset="UTF-8">
-	<title>${site_name}商品管理</title>
+	<title>
+	<c:forEach items="${paramater}" var="c">
+	<c:if test="${c.company eq com && c.name eq 'site_name'}">${c.value}</c:if>
+	</c:forEach>管理
+	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<link rel="stylesheet" href="/eis/inc/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="/eis/inc/bootstrap/css/bootstrap-theme.css" />
@@ -64,7 +68,7 @@
 	<%@ include file="mheader.jsp" %>
 	
 	
-	
+	company:${com}
         
         
         
@@ -95,14 +99,14 @@
        
        
        <div class="wrapper">
-    <form class="form-signin">       
+    <form action="login.vx" class="form-signin">       
       <h2 class="form-signin-heading">帳戶登入</h2>
       <input type="text" class="form-control" name="username" placeholder="登入名稱" required="" ="" />
       <input type="password" class="form-control" name="password" placeholder="密碼" required=""/>      
       <label class="checkbox">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> 記得登入名稱
       </label>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>   
+      <button class="btn btn-lg btn-primary btn-block" name="method:login" type="submit">登入</button>   
     </form>
   </div>
        

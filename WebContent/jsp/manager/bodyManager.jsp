@@ -29,76 +29,121 @@
 	<div class="container">
 	<form action="bodyManager.vx" method="post" enctype="multipart/form-data">		
 		
+		
 		<div class="list-group">
   			<div class="list-group-item list-group-item-action active">網站內容管理</div>
+			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'site_name' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">網站名稱</span>
-			  	<input type="text" class="form-control" name="site_name" value="${site_name}" />
+			  	<input type="text" class="form-control" name="site_name" value="${c.value}" />
 				</div>
 			</div>
+			</c:if>
+			</c:forEach>
+			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_discount' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_discount" class="selectpicker form-control">
-					<option <c:if test="${!empty body_discount}">selected</c:if> value="限時折扣">限時折扣開啟</option>
-					<option <c:if test="${empty body_discount}">selected</c:if> value="">限時折扣關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="限時折扣">限時折扣開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">限時折扣關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_why" class="selectpicker form-control">
-					<option <c:if test="${!empty body_why}">selected</c:if> value="網站優勢">網站優勢開啟</option>
-					<option <c:if test="${empty body_why}">selected</c:if> value="">網站優勢關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="網站優勢">網站優勢開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">網站優勢關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_video" class="selectpicker form-control">
-					<option <c:if test="${!empty body_video}">selected</c:if> value="影片介紹">影片介紹開啟</option>
-					<option <c:if test="${empty body_video}">selected</c:if> value="">影片介紹關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="影片介紹">影片介紹開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">影片介紹關閉</option>
 				</select>
+				<br><br>
+				<input type="text" class="form-control" name="info" value="${c.note}" />
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_how" class="selectpicker form-control">
-					<option <c:if test="${!empty body_how}">selected</c:if> value="訂購說明">訂購說明開啟</option>
-					<option <c:if test="${empty body_how}">selected</c:if> value="">訂購說明關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="訂購說明">訂購說明開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">訂購說明關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_shopnum" class="selectpicker form-control">
-					<option <c:if test="${!empty body_shopnum}">selected</c:if> value="銷售成績">銷售成績開啟</option>
-					<option <c:if test="${empty body_shopnum}">selected</c:if> value="">銷售成績關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="銷售成績">銷售成績開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">銷售成績關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_deliv" class="selectpicker form-control">
-					<option <c:if test="${!empty body_deliv}">selected</c:if> value="付款與運送">付款與運送開啟</option>
-					<option <c:if test="${empty body_deliv}">selected</c:if> value="">付款與運送關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="付款與運送">付款與運送開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">付款與運送關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_clients" class="selectpicker form-control">
-					<option <c:if test="${!empty body_clients}">selected</c:if> value="用戶見證">用戶見證開啟</option>
-					<option <c:if test="${empty body_clients}">selected</c:if> value="">用戶見證關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="用戶見證">用戶見證開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">用戶見證關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_address" class="selectpicker form-control">
-					<option <c:if test="${!empty body_address}">selected</c:if> value="公司地址">公司地址開啟</option>
-					<option <c:if test="${empty body_address}">selected</c:if> value="">公司地址關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="公司地址">公司地址開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">公司地址關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
+			<c:forEach items="${paramater}" var="c">        
+			<c:if test="${c.name eq 'body_video' && c.company eq com}">
 			<div class="list-group-item list-group-item-action">
 			  	<select name="body_contacts" class="selectpicker form-control">
-					<option <c:if test="${!empty body_contacts}">selected</c:if> value="連絡我們">連絡我們開啟</option>
-					<option <c:if test="${empty body_contacts}">selected</c:if> value="">連絡我們關閉</option>
+					<option <c:if test="${!empty c.value}">selected</c:if> value="連絡我們">連絡我們開啟</option>
+					<option <c:if test="${empty c.value}">selected</c:if> value="">連絡我們關閉</option>
 				</select>
 			</div>
+			</c:if>
+			</c:forEach>
 			
 			<div class="list-group-item list-group-item-action">
 				
@@ -108,6 +153,7 @@
 			</div>
 		
 		</div>
+		
 		
 		
 		

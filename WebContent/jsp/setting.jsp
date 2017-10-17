@@ -11,9 +11,9 @@
             <div class="row mb45">
                 <div class="title">類型</div>
                 <div class="title">
-                	<a target="_blank" href="wellcome.vx?view=true"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> 前台測試</a>
+                	<a target="_blank" href="into.vx?store=${param.store}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> 前台測試</a>
                 	<br><br>
-                	<a target="_blank" href="manager.vx"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 後台測試</a>
+                	<a target="_blank" href="manager.vx?com=${param.store}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 後台測試</a>
                 </div>
                 <!-- div class="dtab">
                     <div class="media-left pr40" style="width: 300px;">

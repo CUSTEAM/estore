@@ -8,6 +8,13 @@ public class Product {
 	`descript`
 	`price`*/
 	private Integer Oid;
+	private Integer company;
+	public Integer getCompany() {
+		return company;
+	}
+	public void setCompany(Integer company) {
+		this.company = company;
+	}
 	private String name;
 	private String category;
 	private String descript;

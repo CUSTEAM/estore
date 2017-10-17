@@ -116,7 +116,8 @@
 						( <span class="c-req">* </span>) 為必填欄位
 					</div-->
 					<div class="text-center">
-						<button type="submit" id="order" class="btn btn-icon btn-clicked btn--sendord flaticon-delivery55 mt45">送出訂單</button>
+						<button type="submit" name="method:cashPay" class="btn btn-icon btn-clicked btn--sendord flaticon-delivery55 mt45">現金支付</button>
+						<button type="submit" name="method:cardPay" class="btn btn-icon btn-clicked btn--sendord flaticon-delivery55 mt45">信用卡支付</button>
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,11 @@
 			
 			<div class="call-up pull-left">
 				<div>
-					<a href="wellcome.vx?view=true"> <i class="flaticon-phone72"></i>${site_name}</a>
+					<c:forEach items="${paramater}" var="c">
+					<c:if test="${c.name eq'site_name'&&c.company eq param.store}">
+					<a href="into.vx?store=${param.store}"> <i class="flaticon-phone72"></i>${c.value}</a>
+					</c:if>
+					</c:forEach>
 				</div>
 			</div>
 			<!-- div class="logo-main">
@@ -31,18 +35,20 @@
 					<li><a href="#main-slider" data-dismiss="modal">選單</a></li>
 					<li><a href="#s-list" data-dismiss="modal"> 商品分類 </a></li>
 					
-					<c:if test="${body_discount!=null}"><li><a href="#s-discounts" data-dismiss="modal">限時折扣</a></li></c:if>
 					
-					
-					<c:if test="${body_why!=null}"><li><a href="#s-why" data-dismiss="modal">${body_why}</a></li></c:if>
-					<c:if test="${body_video!=null}"><li><a href="#s-video" data-dismiss="modal">${body_video}</a></li></c:if>
-					<c:if test="${body_how!=null}"><li><a href="#s-how-work" data-dismiss="modal">${body_how}</a></li></c:if>
-					<c:if test="${body_shopnum!=null}"><li><a href="#s-shopnum" data-dismiss="modal">${body_shopnum}</a></li></c:if>
-					<c:if test="${body_deliv!=null}"><li><a href="#s-deliv" data-dismiss="modal">${body_deliv}</a></li></c:if>
-					<c:if test="${body_clients!=null}"><li><a href="#s-clients" data-dismiss="modal">${body_clients}</a></li></c:if>
-					<c:if test="${body_address!=null}"><li><a href="#s-address" data-dismiss="modal">${body_address}</a></li></c:if>
-					<c:if test="${body_contacts!=null}"><li><a href="#s-contacts" data-dismiss="modal">${body_contacts}</a></li></c:if>
-					
+					<c:forEach items="${paramater}" var="c">        
+					<c:if test="${c.company eq param.store}">					
+						<c:if test="${c.name eq 'body_discount' && !empty c.value}"><li><a href="#s-discounts" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_why' && !empty c.value}"><li><a href="#s-why" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_video' && !empty c.value}"><li><a href="#s-video" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_how' && !empty c.value}"><li><a href="#s-how-work" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_shopnum' && !empty c.value}"><li><a href="#s-shopnum" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_deliv' && !empty c.value}"><li><a href="#s-deliv" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_clients' && !empty c.value}"><li><a href="#s-clients" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_address' && !empty c.value}"><li><a href="#s-address" data-dismiss="modal">${c.value}</a></li></c:if>
+						<c:if test="${c.name eq 'body_contacts' && !empty c.value}"><li><a href="#s-contacts" data-dismiss="modal">${c.value}</a></li></c:if>
+					</c:if>
+					</c:forEach>
 				</ul>
 				<a href="#" class="arr-nav prev disabled">&#9679; &#9679;
 					&#9679;</a> <a href="#" class="arr-nav next">&#9679; &#9679;

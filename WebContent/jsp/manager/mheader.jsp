@@ -32,7 +32,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="manager.vx">${site_name}</a>
+      <a class="navbar-brand" href="manager.vx">
+		<c:forEach items="${paramater}" var="c">
+		<c:if test="${c.company eq com && c.name eq 'site_name'}">${c.value}</c:if>
+		</c:forEach>管理
+		</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
