@@ -1,5 +1,14 @@
 package action;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -23,6 +32,7 @@ import javax.servlet.http.Cookie;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ajax.order.OrderClient;
 import model.OrderDetail;
 import model.OrderMain;
 
@@ -45,72 +55,7 @@ public class Finish extends BaseAction{
 		return o;
 	}
 	
-	public String cashPay(){
-		
-		Date now=new Date();
-		OrderMain o=saveOrder(now);
-		float t = 0;
-		JSONArray jsona = new JSONArray(order_note);
-		JSONObject json;
-		
-		OrderDetail d;
-		
-		StringBuilder info=new StringBuilder();
-        for(int i=0; i<jsona.length(); i++){
-        	json = new JSONObject(jsona.get(i).toString());
-        		d=new OrderDetail();
-        		d.setCnt(Integer.parseInt(json.getString("quant")));
-        		d.setOrder_oid(o.getOid());
-        		d.setPrice(Float.parseFloat(json.getString("itemPrice")));
-        		d.setProduct(Integer.parseInt(json.getString("itemId")));        		
-        		df.update(d);        		
-        		/*System.out.print(json.getString("itemId")+", ");
-        		System.out.print(json.getString("itemName")+", ");
-        		System.out.print(json.getString("pic")+", ");
-        		System.out.print(json.getString("quant"));
-        		System.out.println();*/        	
-        		t+=d.getPrice()*d.getCnt();
-        		//info.append(json.getString("itemName")+", 數量: "+json.getString("quant")+", 單價: "+json.getString("itemPrice")+"\n");
-        		info.append(json.getString("itemName")+", 數量: "+json.getString("quant")+", 單價: "+json.getString("itemPrice")+"<br>");
-        }
-        //純文字電子郵件
-		/*String host = "cc.cust.edu.tw";  
-        int port = 25;  
-        final String username = "hsiao@cc.cust.edu.tw";  
-        final String password = "E122713583";  
-  
-        Properties props = new Properties();  
-        props.put("mail.smtp.host", host);  
-        props.put("mail.smtp.auth", "true");  
-        props.put("mail.smtp.starttls.enable", "true");  
-        props.put("mail.smtp.port", port);  
-          
-        Session session = Session.getInstance(props,new Authenticator(){  
-              protected PasswordAuthentication getPasswordAuthentication() {  
-                  return new PasswordAuthentication(username, password);  
-              }} );  
-           
-        try {  
-  
-        Message message = new MimeMessage(session);  
-        //message.
-        message.setFrom(new InternetAddress("hsiao@cc.cust.edu.tw"));  
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hsiao@cc.cust.edu.tw"));  
-        message.setSubject("中華商城購物清單確認信");  
-        message.setText("您好\n\n您的購買清單如下:\n"+info+"\n\n共計: "+t+"元");  
-  
-        Transport transport = session.getTransport("smtp");  
-        transport.connect(host, port, username, password);  
-  
-        Transport.send(message);  
-  
-        System.out.println("Done");  
-  
-        } catch (MessagingException e) {  
-            throw new RuntimeException(e);  
-        }*/ 
-        
-        
+	private void sendMail(String info, OrderMain o, float t) {        
 		//圖片多媒體電子郵件會被收/發方伺服器判定為垃圾, 當然, 學校IP是一定被當垃圾
         try{
             // 初始設定，username 和 password 非必要
@@ -168,12 +113,31 @@ public class Finish extends BaseAction{
                                   ;
             transport.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } 
-        
-		request.setAttribute("msg", info);		
-        
-		//request.setAttribute("msg", saveOrder());
+	}	
+	
+	public String cashPay(){		
+		Date now=new Date();
+		OrderMain o=saveOrder(now);
+		float t = 0;
+		JSONArray jsona = new JSONArray(order_note);
+		JSONObject json;		
+		OrderDetail d;		
+		StringBuilder info=new StringBuilder();
+        for(int i=0; i<jsona.length(); i++){
+        	json = new JSONObject(jsona.get(i).toString());
+        		d=new OrderDetail();
+        		d.setCnt(Integer.parseInt(json.getString("quant")));
+        		d.setOrder_oid(o.getOid());
+        		d.setPrice(Float.parseFloat(json.getString("itemPrice")));
+        		d.setProduct(Integer.parseInt(json.getString("itemId")));        		
+        		df.update(d);        		     	
+        		t+=d.getPrice()*d.getCnt();
+        		info.append(json.getString("itemName")+", 數量: "+json.getString("quant")+", 單價: "+json.getString("itemPrice")+"<br>");
+        }
+        sendMail(info.toString(), o, t);        
+		request.setAttribute("msg", info);	
 		return SUCCESS;
 	}
 	
@@ -189,47 +153,91 @@ public class Finish extends BaseAction{
 		this.url = url;
 	}
 
-	public String cardPay(){
-		
-		
-		/*
+	public String cardPay() throws IOException{
 		
 		SimpleDateFormat sf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date now=new Date();
-		//String q = "random word £500 bank $";
-		//String url = "http://example.com/query?q=" + URLEncoder.encode(q, "UTF-8");
-		//string Order_Amount = Request.QueryString["Order_Amount"]; 
-        //string Order_Content = Request.QueryString["Order_Content"];
-        //string Order_Number = Request.QueryString["Order_Number"];
-		StringBuilder url=new StringBuilder("https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5");
-        //SortedDictionary<string, string> testStr = new SortedDictionary<string, string>();
 		
-        url.append("?MerchantID=2000132");//合作特店編號(由綠界提供)。
-        url.append("&MerchantTradeNo="+Order_Number);//合作特店交易編號(由合作特店提供)。
-        url.append("&MerchantTradeDate", DateTime.Now.ToString(sf.format(now)));//合作特店交易時間。 
-        url.append("PaymentType", "aio");//交易類型。請固定填入 aio  
-        url.append("TotalAmount", Order_Amount);//交易金額。 
-        //Response.Write("<script>alert('"+ Request.QueryString["Order_Amount"] + "');</script>");
-        //testStr.Add("TotalAmount", "18888");//交易金額。 
-        testStr.Add("TradeDesc", "中華科大電商網");//交易描述。
-        testStr.Add("ItemName", Order_Content);//商品名稱。
-        //testStr.Add("ItemName", "My Product");//商品名稱。
-        testStr.Add("ReturnURL", "http://192.192.231.43/AioCheckOut/AioReceieve.aspx");//付款完成通知回傳網址。
-        testStr.Add("ChoosePayment", "Credit");//選擇預設付款方式。
-        testStr.Add("EncryptType", "1");    //CheckMacValue 加密類型。請固定填入1，使用SHA256加密。
-
-        
-
-        
-		*/
+		OrderMain o=saveOrder(now);
+		int t = 0;
+		JSONArray jsona = new JSONArray(order_note);
+		JSONObject json;		
+		OrderDetail d;		
+		StringBuilder info=new StringBuilder();
+        for(int i=0; i<jsona.length(); i++){
+        	json = new JSONObject(jsona.get(i).toString());
+        		d=new OrderDetail();
+        		d.setCnt(Integer.parseInt(json.getString("quant")));
+        		d.setOrder_oid(o.getOid());
+        		d.setPrice(Float.parseFloat(json.getString("itemPrice")));
+        		d.setProduct(Integer.parseInt(json.getString("itemId")));        		
+        		df.update(d);        		     	
+        		t+=d.getPrice()*d.getCnt();
+        		info.append(json.getString("itemName")+", 數量: "+json.getString("quant")+", 單價: "+json.getString("itemPrice")+"<br>");
+        }
+        sendMail(info.toString(), o, t); 	
+        OrderClient http=new OrderClient (response);
 		
+        http.setParameter("CheckMacValue","1");		 
+		http.setParameter("EncryptType","1");
+		http.setParameter("MerchantID","2000132");
+		http.setParameter("MerchantTradeNo",999+o.getOid().toString());
+		http.setParameter("MerchantTradeDate",sf.format(now));
+		http.setParameter("OrderResultURL","https://ap26.cust.edu.tw/estore");
+		http.setParameter("PaymentType","aio");
+		http.setParameter("TotalAmount",String.valueOf(t));
+		http.setParameter("TradeDesc","custec");
+		http.setParameter("ItemName","test");
+		http.setParameter("ReturnURL","https://ap26.cust.edu.tw/estore/AIOBack.vx");
+		//http.setParameter("ReturnURL","https://ap26.cust.edu.tw/estore/AIORemote.vx?RtnBase=https://ap26.cust.edu.tw/estore/AIOReceiver.vx");
+		http.setParameter("ChoosePayment","Credit");		 
+		 
+        String data="HashKey=5294y06JbISpM5x9";
+        data+="&ChoosePayment=Credit"; 
+        data+="&EncryptType=1"; 
+        data+="&ItemName=test"; 
+        data+="&MerchantID=2000132";
+        data+="&MerchantTradeDate="+sf.format(now); 
+        data+="&MerchantTradeNo="+999+o.getOid(); 
+        data+="&OrderResultURL=https://ap26.cust.edu.tw/estore";
+		data+="&PaymentType=aio";	
+		data+="&ReturnURL=https://ap26.cust.edu.tw/estore/AIOBack.vx"; 
+		//data+="&ReturnURL=https://ap26.cust.edu.tw/estore/AIORemote.vx?RtnBase=https://ap26.cust.edu.tw/estore/AIOReceiver.vx"; 
+		data+="&TotalAmount="+t;
+		data+="&TradeDesc=custec"; 		
+		data+="&HashIV=v77hoKGq4kWxNNIS";		
+		//System.out.println(data);		
+		data=URLEncoder.encode(data, "UTF-8");		
+		data=data.toLowerCase();		
+		MessageDigest messageDigest;
+		String encodeStr = "";
 		
+		try {
+			messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(data.getBytes());
+			encodeStr = byte2Hex(messageDigest.digest());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		this.setUrl(url.toString());
-		return "redirect";
+		http.setParameter("CheckMacValue",encodeStr);		
+		http.sendByPost("https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5");
+		return null;
+		
 	}
 	
-	
-	
+	private String byte2Hex(byte[] bytes) {
+		StringBuffer stringBuffer = new StringBuffer();
+		String temp = null;
+		for (int i = 0; i < bytes.length; i++) {
+			temp = Integer.toHexString(bytes[i] & 0xFF);
+			if (temp.length() == 1) {
+				// 補0
+				stringBuffer.append("0");
+			}
+			stringBuffer.append(temp);
+		}
+		return stringBuffer.toString();
+	}
 
 }

@@ -7,6 +7,18 @@
 		</action>
 		
 		
+		<action name="AIOBack" class="action.AioBack">
+			<result>null</result>
+		</action>
+		
+		<action name="AIORemote" class="action.AioRemote">
+			<result>null</result>
+		</action>
+		
+		<action name="AIOReceiver" class="action.AIOReceiver">
+			<result>null</result>
+		</action>
+		
 		<action name="simView" class="action.SimView">
 			<result>/jsp/front.jsp</result>
 		</action>

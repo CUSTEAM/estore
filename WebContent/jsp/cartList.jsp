@@ -94,7 +94,7 @@
 				<div class="form-req mt35">
 					<div class="form-group">
 						<label for="f01">訂購人:</label> 
-						<input type="text" class="form-control" id="f01" name="order_name" data-min="2" required>
+						<input type="text" class="form-control" id="f01" name="order_name" value="John" data-min="2" required>
 					</div>
 					<div class="form-group">
 						<label for="f03">連絡電話 <!-- pan class="c-req">*</span-->:</label> 
@@ -102,15 +102,15 @@
 					</div>
 					<div class="form-group">
 						<label for="f02">E-mail: </label> 
-						<input type="email" name="order_email" class="form-control" id="f02" required>
+						<input type="email" name="order_email" class="form-control" value="july081978@gmail.com" id="f02" required>
 					</div>
 					<div class="form-group">
 						<label for="f04">配送地址:</label>
-						<textarea name="order_addr" id="f04" required></textarea>
+						<textarea name="order_addr" id="f04" required>台北市中山區新生北路三段61號2樓</textarea>
 					</div>
 					<div class="form-group" style="display:none;">
 						<label for="f05">附註事項:</label>
-						<textarea id="order_note" name="order_note" id="f05"></textarea>
+						<textarea id="order_note" name="order_note" id="f05">由管理員代收</textarea>
 					</div>
 					<!--div class="description">
 						( <span class="c-req">* </span>) 為必填欄位
